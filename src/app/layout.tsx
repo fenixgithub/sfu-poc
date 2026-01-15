@@ -1,3 +1,4 @@
+// src/app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -27,7 +28,42 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <div className="min-h-screen">
+          {/* Top header */}
+          <header className="border-b">
+            <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+              <div>
+                <div className="text-lg font-bold">SFU</div>
+                <div className="text-xs text-gray-500">Codex Archive (POC)</div>
+              </div>
+
+              <div className="text-sm text-gray-600">
+                {/* Placeholder for later: Discord login / user menu */}
+                <span className="rounded-md border px-2 py-1">POC</span>
+              </div>
+            </div>
+          </header>
+
+          {/* Body: sidebar + content */}
+          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-6 py-6 md:grid-cols-[220px_1fr]">
+            {/* Sidebar */}
+            <aside className="rounded-lg border p-4">
+              <nav className="space-y-2 text-sm">
+                <a className="block rounded-md px-2 py-1 hover:bg-gray-50" href="/">Home</a>
+                <a className="block rounded-md px-2 py-1 hover:bg-gray-50" href="/nations">Nations</a>
+                <a className="block rounded-md px-2 py-1 hover:bg-gray-50" href="/tanks">Tanks</a>
+                <a className="block rounded-md px-2 py-1 hover:bg-gray-50" href="/wiki">Wiki</a>
+              </nav>
+
+              <div className="mt-4 border-t pt-4 text-xs text-gray-500">
+                Public archive + private workshop.
+              </div>
+            </aside>
+
+            {/* Main content */}
+            <main className="min-w-0">{children}</main>
+          </div>
+        </div>
       </body>
     </html>
   );
