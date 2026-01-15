@@ -110,7 +110,7 @@ export default function TanksPage() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search tanks (name, designation, role, era, tags)…"
-            className="w-full rounded-md border px-3 py-2 text-sm"
+            className="field-sfu"
           />
         </div>
 
@@ -122,7 +122,7 @@ export default function TanksPage() {
             id="tank-nation"
             value={nationFilter}
             onChange={(e) => setNationFilter(e.target.value)}
-            className="w-full rounded-md border px-3 py-2 text-sm"
+            className="select-sfu"
           >
             <option value="all">All nations</option>
             {nationOptions.map((n) => (
@@ -142,7 +142,7 @@ export default function TanksPage() {
               id="tank-role"
               value={roleFilter}
               onChange={(e) => setRoleFilter(e.target.value)}
-              className="w-full rounded-md border px-3 py-2 text-sm"
+              className="select-sfu"
             >
               <option value="all">All roles</option>
               {roleOptions.map((r) => (
@@ -161,7 +161,7 @@ export default function TanksPage() {
               id="tank-era"
               value={eraFilter}
               onChange={(e) => setEraFilter(e.target.value)}
-              className="w-full rounded-md border px-3 py-2 text-sm"
+              className="select-sfu"
             >
               <option value="all">All eras</option>
               {eraOptions.map((e) => (

@@ -81,7 +81,7 @@ export default function WikiPage() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search wiki (title, summary, tags, slug)…"
-            className="w-full rounded-md border px-3 py-2 text-sm"
+            className="field-sfu"
           />
         </div>
 
@@ -93,7 +93,7 @@ export default function WikiPage() {
             id="wiki-nation"
             value={nationFilter}
             onChange={(e) => setNationFilter(e.target.value)}
-            className="w-full rounded-md border px-3 py-2 text-sm"
+            className="select-sfu"
           >
             <option value="all">All nations</option>
             {nationOptions.map((n) => (

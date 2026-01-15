@@ -19,8 +19,25 @@
   }
 }
 
+@layer components {
+  /* Matches the standard field styling (border + bg-black/20 + light text) */
+  .field-sfu {
+    @apply w-full rounded-md border bg-black/40 px-3 py-2 text-sm
+      text-gray-100 placeholder:text-sm
+      outline-none;
+  }
+
+  /* Same as field-sfu, but for native selects (no placeholder) */
+  .select-sfu {
+    @apply w-full rounded-md border bg-black/40 px-3 py-2 text-sm
+      text-gray-100 outline-none;
+  }
+}
+
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
+
