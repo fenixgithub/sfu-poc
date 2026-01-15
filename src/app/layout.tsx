@@ -2,6 +2,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Breadcrumbs } from "@/components/nav/Breadcrumbs";
+import Link from "next/link";
+import { GlobalSearch } from "@/components/search/GlobalSearch";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,14 +34,18 @@ export default function RootLayout({
         <div className="min-h-screen">
           {/* Top header */}
           <header className="border-b">
-            <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+            <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-4 md:flex-row md:items-center md:justify-between">
               <div>
                 <div className="text-lg font-bold">SFU</div>
                 <div className="text-xs text-gray-500">Codex Archive (POC)</div>
               </div>
 
+              {/* Universal search */}
+              <div className="md:w-[420px]">
+                <GlobalSearch />
+              </div>
+
               <div className="text-sm text-gray-600">
-                {/* Placeholder for later: Discord login / user menu */}
                 <span className="rounded-md border px-2 py-1">POC</span>
               </div>
             </div>
@@ -49,11 +56,23 @@ export default function RootLayout({
             {/* Sidebar */}
             <aside className="rounded-lg border p-4">
               <nav className="space-y-2 text-sm">
-                <a className="block rounded-md px-2 py-1 hover:bg-gray-50" href="/">Home</a>
-                <a className="block rounded-md px-2 py-1 hover:bg-gray-50" href="/nations">Nations</a>
-                <a className="block rounded-md px-2 py-1 hover:bg-gray-50" href="/tanks">Tanks</a>
-                <a className="block rounded-md px-2 py-1 hover:bg-gray-50" href="/wiki">Wiki</a>
+                <Link className="block rounded-md px-2 py-1 hover:bg-gray-50" href="/">
+                  Home
+                </Link>
+                <Link className="block rounded-md px-2 py-1 hover:bg-gray-50" href="/nations">
+                  Nations
+                </Link>
+                <Link className="block rounded-md px-2 py-1 hover:bg-gray-50" href="/tanks">
+                  Tanks
+                </Link>
+                <Link className="block rounded-md px-2 py-1 hover:bg-gray-50" href="/wiki">
+                  Wiki
+                </Link>
+                <Link className="block rounded-md px-2 py-1 hover:bg-gray-50" href="/tags">
+                  Tags
+                </Link>
               </nav>
+
 
               <div className="mt-4 border-t pt-4 text-xs text-gray-500">
                 Public archive + private workshop.
@@ -61,7 +80,10 @@ export default function RootLayout({
             </aside>
 
             {/* Main content */}
-            <main className="min-w-0">{children}</main>
+            <main className="min-w-0">
+              <Breadcrumbs />
+              {children}
+            </main>
           </div>
         </div>
       </body>

@@ -9,11 +9,28 @@ type ViewMode = "grid" | "list";
 
 export default function NationsPage() {
   const [view, setView] = useState<ViewMode>("grid");
+  const [query, setQuery] = useState("");
 
-  const sortedNations = useMemo(() => {
-    // Keeping this predictable: sort alphabetically.
-    return [...nations].sort((a, b) => a.name.localeCompare(b.name));
-  }, []);
+  const filteredNations = useMemo(() => {
+    const q = query.trim().toLowerCase();
+
+    const base = [...nations].sort((a, b) => a.name.localeCompare(b.name));
+
+    if (!q) return base;
+
+    return base.filter((n) => {
+      const haystack = [
+        n.name,
+        n.summary,
+        n.slug,
+        ...(n.tags ?? []),
+      ]
+        .join(" ")
+        .toLowerCase();
+
+      return haystack.includes(q);
+    });
+  }, [query]);
 
   return (
     <div className="space-y-4">
@@ -49,10 +66,34 @@ export default function NationsPage() {
         </div>
       </div>
 
+      {/* Search */}
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border p-3">
+        <div className="min-w-[220px] flex-1">
+          <label className="sr-only" htmlFor="nation-search">
+            Search nations
+          </label>
+          <input
+            id="nation-search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search nations (name, summary, tags, slug)…"
+            className="w-full rounded-md border px-3 py-2 text-sm"
+          />
+        </div>
+
+        <div className="text-xs text-gray-500">
+          {filteredNations.length} / {nations.length}
+        </div>
+      </div>
+
       {/* Content */}
-      {view === "grid" ? (
+      {filteredNations.length === 0 ? (
+        <div className="rounded-lg border p-6 text-sm text-gray-600">
+          No nations match your search.
+        </div>
+      ) : view === "grid" ? (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {sortedNations.map((n) => (
+          {filteredNations.map((n) => (
             <div key={n.slug} className="rounded-lg border p-4">
               <h2 className="font-semibold">
                 <Link className="hover:underline" href={`/nations/${n.slug}`}>
@@ -69,7 +110,7 @@ export default function NationsPage() {
         </div>
       ) : (
         <div className="divide-y rounded-lg border">
-          {sortedNations.map((n) => (
+          {filteredNations.map((n) => (
             <div key={n.slug} className="p-4">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <h2 className="font-semibold">
