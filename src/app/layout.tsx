@@ -34,7 +34,7 @@ export default function RootLayout({
         <div className="min-h-screen">
           {/* Top header */}
           <header className="border-b">
-            <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-4 md:flex-row md:items-center md:justify-between">
+             <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-4 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8 2xl:max-w-[1600px]">
               <div>
                 <div className="text-lg font-bold">SFU</div>
                 <div className="text-xs text-gray-500">Codex Archive (POC)</div>
@@ -52,7 +52,7 @@ export default function RootLayout({
           </header>
 
           {/* Body: sidebar + content */}
-          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-6 py-6 md:grid-cols-[220px_1fr]">
+          <div className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-6 px-4 py-6 sm:px-6 lg:px-8 md:grid-cols-[240px_1fr] 2xl:max-w-[1600px]">
             {/* Sidebar */}
             <aside className="rounded-lg border p-4">
               <nav className="space-y-2 text-sm">
