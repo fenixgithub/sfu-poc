@@ -5,6 +5,8 @@ import type { Metadata } from "next";
 
 import { nations, tanks, wikiArticles } from "@/data/mock";
 
+export const runtime = "edge";
+
 export async function generateMetadata({
   params,
 }: {
